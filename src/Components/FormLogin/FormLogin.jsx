@@ -61,7 +61,7 @@ const FormLogin = () => {
       <form className='form-container h-3/4 flex flex-col justify-center bg-slate-600 rounded-lg' onSubmit={handleSubmit}>
         <div className='flex flex-col items-center '>
           <h2 className='p-3 text-4xl text-white hover:text-black pb-10 italic hover:not-italic underline underline-offset-8' >Log In in MovieMaze!!</h2>
-          <Image className='w-1/4 pt-5 pb-5' src={logo} alt='logo' />
+          <Image className='w-1/4 pt-5 pb-5 ' src={logo} alt='logo' />
         </div>
         <div className='flex flex-col p-9 '>
           <label className='block p-5'>

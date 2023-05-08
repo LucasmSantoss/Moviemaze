@@ -1,14 +1,15 @@
-import FormLogin from './Components/FormLogin/FormLogin.jsx'
-import FormRegister from './Components/FormRegister/FormRegister.jsx'
-
-import './App.css';
 import React from 'react';
+import './App.css';
+import { router } from './Pages/index.js'
+import { Provider } from 'react-redux';
+import { RouterProvider } from 'react-router-dom';
+import store from './Store/store.js';
+
 function App() {
   return (
-    <div >
-      <FormRegister/>
-      <FormLogin/>
-    </div>
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   );
 }
 

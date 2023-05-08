@@ -80,9 +80,9 @@ const FormLogin = () => {
         <div className='flex flex-col items-center'>
         <button type="submit" className="w-1/4 p-1 m-5
 		rounded-full bg-black text-white ">Sign In</button>
-        <p>You don't have account?  
-{<Anchor to={"/signup"} className="ancor-register">
-              Register
+        <p className='text-1xl'>You don't have account?   
+{<Anchor to={"/signup"} className="text-white p-1 ">
+               Register
             </Anchor> }</p>
         </div>
       </form>

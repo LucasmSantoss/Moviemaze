@@ -3,6 +3,7 @@ import logo from '../../Imgs/favicon.png';
 import Image from '../Image/Image';
 import axios from "axios";
 import Swal from 'sweetalert2';
+import { NavLink as Anchor } from "react-router-dom";
 
 const FormRegister = () => {
   const nameRef = useRef();
@@ -300,8 +301,14 @@ const FormRegister = () => {
 	</select>
   </label>
         </div>
-		<button type="submit" className="w- 1/4 p-1 m-5
+		<div className='flex flex-col items-center'>
+		<button type="submit" className="w-1/4 p-1 m-5
 		rounded-full bg-black text-white ">Sign Up</button>
+		 <p>You have account?   
+{<Anchor to={"/signin"} className="text-white p-1">
+               Log In
+            </Anchor> }</p>
+		</div>
       </form>
     </div>
   );

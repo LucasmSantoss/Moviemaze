@@ -6,6 +6,7 @@ import Index from "./Index/Index.jsx"
 import { createBrowserRouter } from "react-router-dom"
 
 export const router = createBrowserRouter([
+   
     {
       path: "/",
       element: <IndexLayout />,

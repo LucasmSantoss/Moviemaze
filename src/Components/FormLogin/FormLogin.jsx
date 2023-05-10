@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 const FormLogin = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
-
+  const token = localStorage.getItem('token');
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -29,10 +29,10 @@ const FormLogin = () => {
           JSON.stringify({
             id: res.data.user._id,
             name: res.data.user.name,
+            lastname: res.data.user.lastName,
             mail: res.data.user.mail,
             country: res.data.user.country,
-            address: res.data.user.address,
-            mailing_address: res.data.user.mailing_address,
+            
             admin,
           })
         );
@@ -57,6 +57,7 @@ const FormLogin = () => {
 
 
   return (
+    
     <div className='flex items-center justify-center h-screen bg-slate-900 '>
       <form className='form-container h-3/4 flex flex-col justify-center bg-slate-600 rounded-lg' onSubmit={handleSubmit}>
         <div className='flex flex-col items-center '>

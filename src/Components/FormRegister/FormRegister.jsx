@@ -51,7 +51,7 @@ const FormRegister = () => {
         title: 'Success',
         text: 'User successfully created',
       });
-
+	  setInterval(() => (window.location.href = "/"), 1000);
       event.target.reset();
     } catch (error) {
       console.log(error);
@@ -69,7 +69,7 @@ const FormRegister = () => {
      <form className='form-container h-4/4 flex flex-col justify-center bg-slate-600 rounded-lg mx-auto sm:w-2/3 md:w-1/2 lg:w-1/3 xl:w-1/4' onSubmit={handleSubmit}>
 
         <div className='flex flex-col items-center '>
-          <h2 className='p-3 text-4xl text-center text-white hover:text-black pb-10 italic hover:not-italic underline underline-offset-8' >Log In in MovieMaze!!</h2>
+          <h2 className='p-3 text-4xl text-center text-white hover:text-black pb-10 italic hover:not-italic  underline-offset-8' >Register in MovieMaze!!</h2>
           <Image className='w-1/4 pt-5 pb-5' src={logo} alt='logo' />
         </div>
         <div className='flex flex-col p-6 '>

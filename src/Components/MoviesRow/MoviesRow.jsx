@@ -36,7 +36,7 @@ function MoviesRow() {
   }, []);
 
   return (
-    <div className="p-2 bg-slate-700 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 bg-black">
+    <div className="p-2 bg-gradient-to-t from-black to-transparent grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 bg-black">
       {movies.map((movie) => (
         <div key={movie.id} className="bg-white rounded-lg overflow-hidden shadow-lg">
           <h4 className="flex justify-around text-center text-xl font-semibold text-gray-800 p-4">{movie.title} <p>⚔{movie.vote_average}</p> </h4>

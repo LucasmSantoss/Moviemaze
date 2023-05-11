@@ -44,7 +44,7 @@ function Header() {
 
   return (
     <div className="">
-      <div className="flex justify-between bg-slate-800 text-white p-2 ">
+      <div className="flex justify-between bg-black text-white p-2 ">
         <Anchor to="/"><div className="flex pl-2 ">
           <Image className="h-24 " src={logo}></Image>
           <p className="text-5xl pt-4 p-1 items-center">MovieMaze</p>

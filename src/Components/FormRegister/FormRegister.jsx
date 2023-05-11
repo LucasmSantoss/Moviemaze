@@ -65,11 +65,11 @@ const FormRegister = () => {
   };
 
   return (
-    <div className='flex items-center justify-center h-screen bg-slate-900 '>
-     <form className='form-container h-4/4 flex flex-col justify-center bg-slate-600 rounded-lg mx-auto sm:w-2/3 md:w-1/2 lg:w-1/3 xl:w-1/4' onSubmit={handleSubmit}>
+    <div className='flex items-center justify-center h-screen bg-gradient-to-t from-black to-transparent '>
+     <form className='form-container h-4/4 flex flex-col justify-center bg-gradient-to-t from-black to-transparentrounded-lg mx-auto sm:w-2/3 md:w-1/2 lg:w-1/3 xl:w-1/4' onSubmit={handleSubmit}>
 
         <div className='flex flex-col items-center '>
-          <h2 className='p-3 text-4xl text-center text-white hover:text-black pb-10 italic hover:not-italic  underline-offset-8' >Register in MovieMaze!!</h2>
+          <h2 className='p-3 text-4xl text-center  hover:text-black pb-10 italic hover:not-italic  underline-offset-8' >Register in MovieMaze!!</h2>
           <Image className='w-1/4 pt-5 pb-5' src={logo} alt='logo' />
         </div>
         <div className='flex flex-col p-6 '>
@@ -303,8 +303,8 @@ const FormRegister = () => {
         </div>
 		<div className='flex flex-col items-center'>
 		<button type="submit" className="w-1/4 p-1 m-5
-		rounded-full bg-black text-white ">Sign Up</button>
-		 <p>You have account?   
+		rounded-full bg-white ">Sign Up</button>
+		 <p className='text-white text-sm'>You have account?   
 {<Anchor to={"/signin"} className="text-white p-1">
                Log In
             </Anchor> }</p>

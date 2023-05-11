@@ -58,10 +58,10 @@ const FormLogin = () => {
 
   return (
     
-    <div className='flex items-center justify-center h-screen bg-slate-900 '>
-      <form className='form-container h-3/4 flex flex-col justify-center bg-slate-600 rounded-lg' onSubmit={handleSubmit}>
+    <div className='flex items-center justify-center h-screen bg-gradient-to-t from-black to-transparent '>
+      <form className='form-container h-3/4 flex flex-col justify-center bg-gradient-to-t from-black to-transparent rounded-lg' onSubmit={handleSubmit}>
         <div className='flex flex-col items-center '>
-          <h2 className='p-3 text-4xl text-white hover:text-black pb-10 italic hover:not-italic underline underline-offset-8' >Log In in MovieMaze!!</h2>
+          <h2 className='p-3 text-4xl  hover:text-black pb-10 italic hover:not-italic' >Log In in MovieMaze!!</h2>
           <Image className='w-1/4 pt-5 pb-5 ' src={logo} alt='logo' />
         </div>
         <div className='flex flex-col p-9 '>
@@ -80,8 +80,8 @@ const FormLogin = () => {
         </div>
         <div className='flex flex-col items-center'>
         <button type="submit" className="w-1/4 p-1 m-5
-		rounded-full bg-black text-white ">Sign In</button>
-        <p className='text-1xl'>You don't have account?   
+		rounded-full bg-white  ">Sign In</button>
+        <p className='text-white text-sm'>You don't have account?   
 {<Anchor to={"/signup"} className="text-white p-1 ">
                Register
             </Anchor> }</p>

@@ -39,13 +39,16 @@ function MoviesRow() {
     <div className="p-2 bg-slate-700 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 bg-black">
       {movies.map((movie) => (
         <div key={movie.id} className="bg-white rounded-lg overflow-hidden shadow-lg">
-          <h4 className="text-center text-xl font-semibold text-gray-800 p-4">{movie.title}</h4>
+          <h4 className="flex justify-around text-center text-xl font-semibold text-gray-800 p-4">{movie.title} <p>⚔{movie.vote_average}</p> </h4>
           <img
             src={`${URL_IMAGE}${movie.poster_path}`}
             alt={movie.title}
             className="w-full h-auto"
           />
-          <div className="p-4">{movie.release_date}</div>
+          <div className="flex flex-col  p-2 w-full h-auto">
+          <p className='p-1 text-sm pb-1'>{movie.overview}</p>
+            <p className='  text-center text-sm  font-semibold'> {movie.release_date}</p>
+            </div>
         </div>
       ))}
     </div>

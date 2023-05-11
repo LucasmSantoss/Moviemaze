@@ -43,7 +43,7 @@ function Header() {
 
 
   return (
-    <div>
+    <div className="pb-2">
       <div className="flex justify-between bg-slate-800 text-white p-2 ">
         <div className="flex pl-2 ">
           <Image className="h-24 " src={logo}></Image>

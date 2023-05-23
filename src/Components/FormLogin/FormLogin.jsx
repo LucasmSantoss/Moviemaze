@@ -82,7 +82,7 @@ const FormLogin = () => {
         <button type="submit" className="w-1/4 p-1 m-5
 		rounded-full bg-white  ">Sign In</button>
         <p className='text-white text-sm'>You don't have account?   
-{<Anchor to={"/signup"} className="text-white p-1 ">
+{<Anchor to={"/signup"} className="text-white p-1 text-orange-600 ">
                Register
             </Anchor> }</p>
         </div>

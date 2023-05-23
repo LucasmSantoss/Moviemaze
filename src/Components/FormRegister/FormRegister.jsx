@@ -304,8 +304,8 @@ const FormRegister = () => {
 		<div className='flex flex-col items-center'>
 		<button type="submit" className="w-1/4 p-1 m-5
 		rounded-full bg-white ">Sign Up</button>
-		 <p className='text-white text-sm'>You have account?   
-{<Anchor to={"/signin"} className="text-white p-1">
+		 <p className='text-white text-sm mb-2'>You have account?   
+{<Anchor to={"/signin"} className="text-white p-1 text-orange-600">
                Log In
             </Anchor> }</p>
 		</div>

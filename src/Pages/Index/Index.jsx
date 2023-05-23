@@ -15,9 +15,9 @@ function Index() {
       </div>
       <div className="flex justify-around items-center p-5 ">
         <p className="w-2/4 text-2xl text-center mr-3 p-4">
-          "MovieMaze" is a website created by Lucas Matias Santos that allows you
+          "MovieMaze" is a website created by Lucas Matias Santos and Karen Perez that allows you
           to discover and explore a wide selection of movies from around the
-          world. Using The Movie Database (TMDb) API, the website offers a variety
+          world. Using The Movie Database <a className="text-orange-600" href="https://www.themoviedb.org/?language=es">(TMDb) </a>API, the website offers a variety
           of cinematic content, from acclaimed classics to the latest releases.
           In "MovieMaze", you can search for movies by title, genre, or release
           year, and get detailed information about each movie, including its
@@ -34,7 +34,7 @@ function Index() {
           Explore, discover, and enjoy the best movies on "MovieMaze"!
         </p>
         <Anchor to="/movies"><button className="flex p-5 h-24 items-center bg-black text-white hover:bg-white hover:text-black rounded-full transition-colors duration-300 ease-in-out mt-4">
-         Ver Catálogo de Películas
+        See movies in premiere
         </button></Anchor>
       </div>
     </div>

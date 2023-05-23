@@ -39,7 +39,7 @@ function MoviesRow() {
     <div className="p-2 bg-gradient-to-t from-black to-transparent grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 bg-black">
       {movies.map((movie) => (
         <div key={movie.id} className="bg-white rounded-lg overflow-hidden shadow-lg">
-          <h4 className="flex justify-around text-center text-xl font-semibold text-gray-800 p-4">{movie.title} <p>⚔{movie.vote_average}</p> </h4>
+          <h4 className="flex justify-around text-center text-xl font-semibold text-gray-800 p-4"><span className=''>{movie.title} </span> <p className='text-orange-600'>⚔{movie.vote_average}</p> </h4>
           <img
             src={`${URL_IMAGE}${movie.poster_path}`}
             alt={movie.title}
@@ -47,7 +47,7 @@ function MoviesRow() {
           />
           <div className="flex flex-col  p-2 w-full h-auto">
           <p className='p-1 text-sm pb-1'>{movie.overview}</p>
-            <p className='  text-center text-sm  font-semibold'> {movie.release_date}</p>
+            <p className='  text-center text-sm  font-semibold text-orange-600'> {movie.release_date}</p>
             </div>
         </div>
       ))}

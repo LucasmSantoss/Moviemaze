@@ -1,66 +1,79 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Youtube from 'react-youtube';
+import YouTube from 'react-youtube';
+
 import Image from "../Image/Image";
 import search from "../../Imgs/search.png"
 
 function MoviesRow() {
-  const API_URL = 'https://api.themoviedb.org/3';
-  const API_KEY = '9e0856ae02dd1e042f13b81f15fb6661';
-  const URL_IMAGE = 'https://image.tmdb.org/t/p/original';
+  const API_URL = "https://api.themoviedb.org/3";
+  const API_KEY = "4f5f43495afcc67e9553f6c684a82f84";
   const IMAGE_PATH = "https://image.tmdb.org/t/p/original";
 
+  // endpoint para las imagenes
+  const URL_IMAGE = "https://image.tmdb.org/t/p/original";
+
+  // variables de estado
   const [movies, setMovies] = useState([]);
   const [searchKey, setSearchKey] = useState("");
+  //const [selectedMovie, setSelectedMovie] = useState({})
   const [trailer, setTrailer] = useState(null);
   const [movie, setMovie] = useState({ title: "Loading Movies" });
   const [playing, setPlaying] = useState(false);
 
+  // funcion para realizar la peticion get a la api
   const fetchMovies = async (searchKey) => {
     const type = searchKey ? "search" : "discover";
-    try {
-      const response = await axios.get(`${API_URL}/${type}/movie`, {
-        params: {
-          api_key: API_KEY,
-          query: searchKey,
-        },
-      });
-      const { data: { results } } = response;
-      setMovies(results);
-      setMovie(results[0]);
-    } catch (error) {
-      console.log(error);
-    }
-    if(results.length) {
-      await fetchMovie(results[0].id)
+    const {
+      data: { results },
+    } = await axios.get(`${API_URL}/${type}/movie`, {
+      params: {
+        api_key: API_KEY,
+        query: searchKey,
+      },
+    });
+    //console.log('data',results);
+    //setSelectedMovie(results[0])
+
+    setMovies(results);
+    setMovie(results[0]);
+
+    if (results.length) {
+      await fetchMovie(results[0].id);
     }
   };
 
-  useEffect(() => {
-    fetchMovies();
-  }, []);
-
-  const selectMovie = async(movie) =>{
-    fetchMovie(movie.id)
-    setMovie(movie)
-    window.scrollTo(0,0)
-  }
-
-  const fetchMovie = async(id) =>{
-    const {data} = await axios.get(`${API_URL}/movie/${id}`, {
-      params:{
+  // funcion para la peticion de un solo objeto y mostrar en reproductor de videos
+  const fetchMovie = async (id) => {
+    const { data } = await axios.get(`${API_URL}/movie/${id}`, {
+      params: {
         api_key: API_KEY,
-        append_to_response: "videos"
-      }
-    })
+        append_to_response: "videos",
+      },
+    });
 
-    if(data.videos && data.videos.results){
-      const trailer = data.videos.results.find((video) => video.name === "Official Trailer");
-      setTrailer(trailer ? trailer : data.videos.results[0])
+    if (data.videos && data.videos.results) {
+      const trailer = data.videos.results.find(
+        (vid) => vid.name === "Official Trailer"
+      );
+      setTrailer(trailer ? trailer : data.videos.results[0]);
     }
-    setMovie(data)
-  }
+    //return data
+    setMovie(data);
+  };
 
+  const selectMovie = async (movie) => {
+    // const data = await fetchMovie(movie.id)
+    // console.log(data);
+    // setSelectedMovie(movie)
+    fetchMovie(movie.id);
+
+    setMovie(movie);
+    window.scrollTo(0, 0);
+  };
+
+  // funcion para buscar peliculas
+  
   const searchMovies = (e) => {
     const value = e.target.value;
     setSearchKey(value);
@@ -72,6 +85,11 @@ function MoviesRow() {
       fetchMovies(value);
     }
   }
+  
+  useEffect(() => {
+    fetchMovies();
+  }, []);
+
 
 
   return (
@@ -87,7 +105,7 @@ function MoviesRow() {
   <main>
     {movie ? (
       <div
-        className="viewtrailer"
+        className="bg-cover bg-center  w-auto h-screen flex flex-col justify-center items-center"
         style={{
           backgroundImage: `url("${IMAGE_PATH}${movie.backdrop_path}")`,
         }}
@@ -96,11 +114,11 @@ function MoviesRow() {
           <>
             <YouTube
               videoId={trailer.key}
-              className="reproductor container"
-              containerClassName="youtube-container amru"
+              className="mx-auto p-4"
+              containerClassName="youtube-container"
               opts={{
-                width: "100%",
-                height: "100%",
+                width: "700px",
+                height: "500px",
                 playerVars: {
                   autoplay: 1,
                   controls: 0,
@@ -115,34 +133,34 @@ function MoviesRow() {
             />
             <button
               onClick={() => setPlaying(false)}
-              className="boton"
+              className=" top-4 right-4 bg-white text-gray-800 px-4 py-2 rounded-lg"
             >
               Close
             </button>
           </>
         ) : (
-          <div className="container">
-            <div className="">
-              {trailer ? (
-                <button
-                  className="boton"
-                  onClick={() => setPlaying(true)}
-                  type="button"
-                >
-                  Play Trailer
-                </button>
-              ) : (
-                "Sorry, no trailer available"
-              )}
-              <h1 className="text-white">{movie.title}</h1>
-              <p className="text-white">{movie.overview}</p>
-            </div>
+          <div className=" mx-auto mb-16 text-center">
+            {trailer ? (
+              <button
+                className=" bg-orange-500 text-white px-8 py-2 rounded-lg mb-4"
+                onClick={() => setPlaying(true)}
+                type="button"
+              >
+                Play Trailer
+              </button>
+            ) : (
+              <p className="text-white mb-4">Sorry, no trailer available</p>
+            )}
+            <h1 className="text-white text-3xl font-bold mb-4">{movie.title}</h1>
+            <p className="text-white">{movie.overview}</p>
           </div>
         )}
       </div>
     ) : null}
   </main>
 </div>
+
+
 
 
     <div className="p-2 bg-gradient-to-t from-black to-transparent grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 bg-black">

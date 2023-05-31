@@ -9,7 +9,7 @@ function Index() {
       
     >
       <div className="flex p-2 ">
-        <h1 className="text-9xl p-5 font-bold shadow-lg ">
+        <h1 className="text-6xl p-5 font-bold shadow-lg ">
           Welcome to MovieMaze 📽
         </h1>
       </div>

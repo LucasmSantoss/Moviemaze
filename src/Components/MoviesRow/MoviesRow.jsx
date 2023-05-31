@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import YouTube from 'react-youtube';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import YouTube from "react-youtube";
 
 import Image from "../Image/Image";
-import search from "../../Imgs/search.png"
+import search from "../../Imgs/search.png";
 
 function MoviesRow() {
   const API_URL = "https://api.themoviedb.org/3";
@@ -16,7 +16,6 @@ function MoviesRow() {
   // variables de estado
   const [movies, setMovies] = useState([]);
   const [searchKey, setSearchKey] = useState("");
-  //const [selectedMovie, setSelectedMovie] = useState({})
   const [trailer, setTrailer] = useState(null);
   const [movie, setMovie] = useState({ title: "Loading Movies" });
   const [playing, setPlaying] = useState(false);
@@ -32,8 +31,6 @@ function MoviesRow() {
         query: searchKey,
       },
     });
-    //console.log('data',results);
-    //setSelectedMovie(results[0])
 
     setMovies(results);
     setMovie(results[0]);
@@ -58,128 +55,137 @@ function MoviesRow() {
       );
       setTrailer(trailer ? trailer : data.videos.results[0]);
     }
-    //return data
+
     setMovie(data);
   };
 
   const selectMovie = async (movie) => {
-    // const data = await fetchMovie(movie.id)
-    // console.log(data);
-    // setSelectedMovie(movie)
     fetchMovie(movie.id);
-
     setMovie(movie);
     window.scrollTo(0, 0);
   };
 
-  // funcion para buscar peliculas
-  
   const searchMovies = (e) => {
     const value = e.target.value;
     setSearchKey(value);
-  
+
     if (value === "") {
       console.log("No se encontró su película!");
-      fetchMovies(); // Búsqueda sin parámetros para mostrar los resultados iniciales
+      fetchMovies();
     } else {
       fetchMovies(value);
     }
-  }
-  
+  };
+
   useEffect(() => {
     fetchMovies();
   }, []);
 
-
-
   return (
     <div>
-     <div className="bg-slate-300 flex justify-between">
-  <form className="flex p-4" onSubmit={searchMovies}>
-    <input className="rounded-md" type="text" placeholder="Search Movies" onChange={searchMovies}  />
-    <Image src={search} className="h-8 p-1" />
-  </form>
-  <h2 className="text-3xl p-3 ">Trailer Movies</h2>
-</div>
-<div>
-  <main>
-    {movie ? (
-      <div
-        className="bg-cover bg-center  w-auto h-screen flex flex-col justify-center items-center"
-        style={{
-          backgroundImage: `url("${IMAGE_PATH}${movie.backdrop_path}")`,
-        }}
-      >
-        {playing ? (
-          <>
-            <YouTube
-              videoId={trailer.key}
-              className="mx-auto p-4"
-              containerClassName="youtube-container"
-              opts={{
-                width: "700px",
-                height: "500px",
-                playerVars: {
-                  autoplay: 1,
-                  controls: 0,
-                  cc_load_policy: 0,
-                  fs: 0,
-                  iv_load_policy: 0,
-                  modestbranding: 0,
-                  rel: 0,
-                  showinfo: 0,
-                },
-              }}
-            />
-            <button
-              onClick={() => setPlaying(false)}
-              className=" top-4 right-4 bg-white text-gray-800 px-4 py-2 rounded-lg"
-            >
-              Close
-            </button>
-          </>
-        ) : (
-          <div className=" mx-auto mb-16 text-center">
-            {trailer ? (
-              <button
-                className=" bg-orange-500 text-white px-8 py-2 rounded-lg mb-4"
-                onClick={() => setPlaying(true)}
-                type="button"
-              >
-                Play Trailer
-              </button>
-            ) : (
-              <p className="text-white mb-4">Sorry, no trailer available</p>
-            )}
-            <h1 className="text-white text-3xl font-bold mb-4">{movie.title}</h1>
-            <p className="text-white">{movie.overview}</p>
-          </div>
-        )}
-      </div>
-    ) : null}
-  </main>
-</div>
-
-
-
-
-    <div className="p-2 bg-gradient-to-t from-black to-transparent grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 bg-black">
-      {movies.map((movie) => (
-        <div key={movie.id} className="bg-white rounded-lg overflow-hidden shadow-lg">
-          <h4 className="flex justify-around text-center text-xl font-semibold text-gray-800 p-4"><span className=''>{movie.title} </span> <p className='text-orange-600'>⚔{movie.vote_average}</p> </h4>
-          <img
-            src={`${URL_IMAGE}${movie.poster_path}`}
-            alt={movie.title}
-            className="w-full h-auto"
+      <div className="bg-slate-300 flex justify-between">
+        <form className="flex p-4" onSubmit={searchMovies}>
+          <input
+            className="rounded-md"
+            type="text"
+            placeholder="Search Movies"
+            onChange={searchMovies}
           />
-          <div className="flex flex-col  p-2 w-full h-auto">
-          <p className='p-1 text-sm pb-1'>{movie.overview}</p>
-            <p className='  text-center text-sm  font-semibold text-orange-600'> {movie.release_date}</p>
+          <Image src={search} className="h-8 p-1" />
+        </form>
+        <h2 className="text-3xl p-3 ">Trailer Movies</h2>
+      </div>
+
+      <div>
+        <main>
+          {movie ? (
+            <div
+              className="bg-cover bg-center w-auto h-screen flex flex-col justify-center items-center"
+              style={{
+                backgroundImage: `url("${IMAGE_PATH}${movie.backdrop_path}")`,
+              }}
+            >
+              {playing ? (
+                <>
+                  <YouTube
+                    videoId={trailer.key}
+                    className="mx-auto p-4"
+                    containerClassName="youtube-container"
+                    opts={{
+                      width: "800px",
+                      height: "600px",
+                      playerVars: {
+                        autoplay: 1,
+                        controls: 0,
+                        cc_load_policy: 0,
+                        fs: 0,
+                        iv_load_policy: 0,
+                        modestbranding: 0,
+                        rel: 0,
+                        showinfo: 0,
+                      },
+                    }}
+                  />
+                  <button
+                    onClick={() => setPlaying(false)}
+                    className=" top-4 right-4 bg-white text-gray-800 px-4 py-2 rounded-lg"
+                  >
+                    Close
+                  </button>
+                </>
+              ) : (
+                <div className="mx-auto mb-16 text-center">
+                  {trailer ? (
+                    <button
+                      className="bg-orange-500 text-white px-8 py-2 rounded-lg mb-4"
+                      onClick={() => setPlaying(true)}
+                      type="button"
+                    >
+                      Play Trailer
+                    </button>
+                  ) : (
+                    <p className="text-white mb-4">
+                      Sorry, no trailer available
+                    </p>
+                  )}
+                  <h1 className="text-white text-3xl font-bold mb-4">
+                    {movie.title}
+                  </h1>
+                  <p className="text-white">{movie.overview}</p>
+                </div>
+              )}
             </div>
-        </div>
-      ))}
-    </div>
-    </div>
+          ) : null}
+        </main>
+      </div>
+
+     <div className="p-2 bg-gradient-to-t from-black to-transparent grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 bg-black">
+        {movies.map((movie) => (
+          <div
+            key={movie.id}
+            className="bg-white rounded-lg overflow-hidden shadow-lg "
+            onMouseEnter={() => { document.body.style.cursor = 'pointer'; }}
+            onMouseLeave={() => { document.body.style.cursor = 'auto'; }}
+            onClick={() => selectMovie(movie)}
+          >
+            <h4 className="flex justify-around text-center text-xl font-semibold text-gray-800 p-4">
+              <span className="">{movie.title}</span>
+              <p className="text-orange-600">⚔{movie.vote_average}</p>
+            </h4>
+            <img
+              src={`${URL_IMAGE}${movie.poster_path}`}
+              alt={movie.title}
+              className="w-full h-auto"
+            />
+            <div className="flex flex-col p-2 w-full h-auto">
+              <p className="text-center text-sm font-semibold text-orange-600">
+                {movie.release_date}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div> 
   );
 }
 

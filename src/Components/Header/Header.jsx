@@ -43,56 +43,26 @@ function Header() {
 
 
   return (
-    <div className="">
-      <div className="flex justify-between bg-black text-white p-2 ">
-        <Anchor to="/"><div className="flex pl-2 ">
-          <Image className="h-24 " src={logo}></Image>
-          <p className="text-4xl pt-4 p-1 items-center">MovieMaze</p>
-          </div></Anchor>
-        
-          <div className="flex items-center pr-2">
-        { token ? "" : <Anchor className="text-sm p-1" to="/signin">Login</Anchor>}
-        { token ? "" : <Anchor className=" text-sm p-1" to="/signup">Register</Anchor>}
-        {token ? <Anchor onClick={handleLogout}><Image className="h-12 p-1" src={logout} ></Image></Anchor> : "" }
+    <div className="bg-black text-white">
+    <div className="flex justify-between items-center p-2">
+      <Anchor to="/">
+        <div className="flex items-center pl-2">
+          <Image className="h-12" src={logo} alt="Logo" />
+          <p className="text-2xl font-bold ml-2">MovieMaze</p>
         </div>
-        
-       
-        
-       
+      </Anchor>
+      <div className="flex items-center pr-2">
+        {token ? null : <Anchor className="text-sm p-1" to="/signin">Login</Anchor>}
+        {token ? null : <Anchor className="text-sm p-1" to="/signup">Register</Anchor>}
+        {token ? (
+          <Anchor onClick={handleLogout} className="p-1">
+            <Image className="h-8" src={logout} alt="Logout" />
+          </Anchor>
+        ) : null}
       </div>
-      {/* <div className="flex justify-center from-stone-300 p-2">
-        <button
-          className="w-20 p-1 mr-2
-bg-cyan-500 rounded-full shadow-lg shadow-cyan-500/50 text-black   "
-        >
-          Inicio
-        </button>
-        <button
-          className="w-20 p-1 mr-2
-bg-cyan-500 rounded-full shadow-lg shadow-cyan-500/50 text-black  "
-        >
-          Inicio
-        </button>
-        <button
-          className="w-20 p-1 mr-2
-bg-cyan-500 rounded-full shadow-lg shadow-cyan-500/50 text-black  "
-        >
-          Inicio
-        </button>
-        <button
-          className="w-20 p-1 mr-2
-bg-cyan-500  rounded-full shadow-lg shadow-cyan-500/50 text-black  "
-        >
-          Inicio
-        </button>
-        <button
-          className="w-20 p-1 mr-2
-bg-cyan-500 rounded-full shadow-lg shadow-cyan-500/50 text-black  "
-        >
-          Inicio
-        </button>
-      </div> */}
     </div>
+  </div>
+  
   );
 }
 

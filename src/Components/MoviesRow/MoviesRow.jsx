@@ -18,6 +18,7 @@ function MoviesRow() {
   const [trailer, setTrailer] = useState(null);
   const [movie, setMovie] = useState({ title: "Loading Movies" });
   const [playing, setPlaying] = useState(false);
+  const [favoritos, setFavoritos] = useState([]);
 
   // funcion para realizar la peticion get a la api
   const fetchMovies = async (searchKey) => {
@@ -76,6 +77,10 @@ function MoviesRow() {
     }
   };
 
+  const agregarFavorito = (movie) => {
+    setFavoritos([...favoritos, movie]);
+  };
+
   useEffect(() => {
     fetchMovies();
   }, []);
@@ -96,110 +101,114 @@ function MoviesRow() {
       </div>
 
       <div className="flex justify-center items-center bg-black p-5 ">
-
-  <main >
-    {movie ? (
-      <div
-        className="bg-cover bg-center h-screen flex flex-col justify-center items-center object-contain"
-        style={{
-          backgroundImage: `url("${IMAGE_PATH}${movie.backdrop_path}")`,
-        }}
-      >
-        {playing ? (
-          <>
-            <YouTube
-              videoId={trailer.key}
-              className="mx-auto p-4"
-              containerClassName="youtube-container"
-              opts={{
-                width: "1000px",
-                height: "500px",
-                playerVars: {
-                  autoplay: 1,
-                  controls: 0,
-                  cc_load_policy: 0,
-                  fs: 0,
-                  iv_load_policy: 0,
-                  modestbranding: 0,
-                  rel: 0,
-                  showinfo: 0,
-                },
+        <main>
+          {movie ? (
+            <div
+              className="bg-cover bg-center h-screen flex flex-col justify-center items-center object-contain"
+              style={{
+                backgroundImage: `url("${IMAGE_PATH}${movie.backdrop_path}")`,
               }}
-            />
-            <button
-              onClick={() => setPlaying(false)}
-              className="bg-white text-gray-800 px-4 py-2 rounded-lg"
             >
-              Close
-            </button>
-          </>
-        ) : (
-          <div className="mx-auto mb-20 text-center"> {/* Aumento del margin bottom */}
-            {trailer ? (
-              <button
-                className="bg-orange-500 text-white px-8 py-2 rounded-lg mb-4"
-                onClick={() => setPlaying(true)}
-                type="button"
-              >
-                Play Trailer
-              </button>
-            ) : (
-              <p className="text-white mb-4">Sorry, no trailer available</p>
-            )}
-            <h1 className="text-white text-3xl font-bold mb-4">
-              {movie.title}
-            </h1>
-            <p
-              className="text-white text-lg"
-              style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 1.5)" }}
-            >
-              {movie.overview}
-            </p>
-          </div>
-        )}
+              {playing ? (
+                <>
+                  <YouTube
+                    videoId={trailer.key}
+                    className="mx-auto p-4"
+                    containerClassName="youtube-container"
+                    opts={{
+                      width: "1000px",
+                      height: "500px",
+                      playerVars: {
+                        autoplay: 1,
+                        controls: 0,
+                        cc_load_policy: 0,
+                        fs: 0,
+                        iv_load_policy: 0,
+                        modestbranding: 0,
+                        rel: 0,
+                        showinfo: 0,
+                      },
+                    }}
+                  />
+                  <button
+                    onClick={() => setPlaying(false)}
+                    className="bg-white text-gray-800 px-4 py-2 rounded-lg"
+                  >
+                    Close
+                  </button>
+                </>
+              ) : (
+                <div className="mx-auto mb-20 text-center">
+                  {trailer ? (
+                    <button
+                      className="bg-orange-500 text-white px-8 py-2 rounded-lg mb-4"
+                      onClick={() => setPlaying(true)}
+                      type="button"
+                    >
+                      Play Trailer
+                    </button>
+                  ) : (
+                    <p className="text-white mb-4">Sorry, no trailer available</p>
+                  )}
+                  <h1 className="text-white text-3xl font-bold mb-4">
+                    {movie.title}
+                  </h1>
+                  <p
+                    className="text-white text-lg"
+                    style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 1.5)" }}
+                  >
+                    {movie.overview}
+                  </p>
+                  <button
+                    onClick={() => agregarFavorito(movie)}
+                    className={`bg-orange-500 text-white px-4 py-2 rounded-lg ${
+                      favoritos.includes(movie) ? "opacity-50 cursor-not-allowed" : ""
+                    }`}
+                    disabled={favoritos.includes(movie)}
+                  >
+                    {favoritos.includes(movie) ? "Agregado a favoritos" : "Agregar a favoritos"}
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : null}
+        </main>
       </div>
-    ) : null}
-  </main>
-</div>
-
-
 
       <div className="p-2 bg-gradient-to-t from-black to-transparent grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 bg-black">
-  {movies.map((movie) => (
-    <div
-      key={movie.id}
-      className="bg-white rounded-lg overflow-hidden shadow-lg"
-      onMouseEnter={() => {
-        document.body.style.cursor = "pointer";
-      }}
-      onMouseLeave={() => {
-        document.body.style.cursor = "auto";
-      }}
-      onClick={() => selectMovie(movie)}
-    >
-      <h4 className="flex justify-around text-center text-lg font-semibold text-gray-800 p-2">
-        <span>{movie.title}</span>
-        <p className="text-orange-600">⚔{movie.vote_average}</p>
-      </h4>
-      <div className="flex items-center justify-center">
-        <img
-          src={`${URL_IMAGE}${movie.poster_path}`}
-          alt={movie.title}
-          className="w-full h-auto object-contain"
-          style={{ maxHeight: "400px" }}
-        />
-      </div>
-      <div className="flex flex-col p-2">
-        <p className="text-center text-sm font-semibold text-orange-600">
-          {movie.release_date}
-        </p>
+        {movies.map((movie) => (
+          <div
+            key={movie.id}
+            className="bg-white rounded-lg overflow-hidden shadow-lg"
+            onMouseEnter={() => {
+              document.body.style.cursor = "pointer";
+            }}
+            onMouseLeave={() => {
+              document.body.style.cursor = "auto";
+            }}
+            onClick={() => selectMovie(movie)}
+          >
+            <h4 className="flex justify-around text-center text-lg font-semibold text-gray-800 p-2">
+              <span>{movie.title}</span>
+              <p className="text-orange-600">⚔{movie.vote_average}</p>
+            </h4>
+            <div className="flex items-center justify-center">
+              <img
+                src={`${URL_IMAGE}${movie.poster_path}`}
+                alt={movie.title}
+                className="w-full h-auto object-contain"
+                style={{ maxHeight: "400px" }}
+              />
+            </div>
+            <div className="flex flex-col p-2">
+              <p className="text-center text-sm font-semibold text-orange-600">
+                {movie.release_date}
+              </p>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
-  ))}
-</div>
-
-
-    </div> 
   );
 }
 

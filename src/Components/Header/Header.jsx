@@ -12,7 +12,7 @@ const { logoutReload } = logoutActions
 
 function Header() {
   const token = localStorage.getItem('token');
-
+  
     const dispatch = useDispatch();
 
     let headers = { headers: { 'Authorization': `Bearer ${token}` } }

@@ -6,6 +6,7 @@ import axios from 'axios'
 import { useDispatch } from "react-redux";
 import Swal from 'sweetalert2'
 import logout from '../../Imgs/logout.png'
+import profile from "../../Imgs/profile.png"
 import { NavLink as Anchor } from "react-router-dom";
 
 const { logoutReload } = logoutActions
@@ -54,6 +55,11 @@ function Header() {
       <div className="flex items-center pr-2">
         {token ? null : <Anchor className="text-sm p-1" to="/signin">Login</Anchor>}
         {token ? null : <Anchor className="text-sm p-1" to="/signup">Register</Anchor>}
+        {token ? (
+          <Anchor  className="p-1">
+            <Image className="h-8" src={profile} alt="Logout" />
+          </Anchor>
+        ) : null}
         {token ? (
           <Anchor onClick={handleLogout} className="p-1">
             <Image className="h-8" src={logout} alt="Logout" />

@@ -4,6 +4,7 @@ import MainLayout from "../Layouts/MainLayouts/MainLayouts.jsx"
 import Movies from '../Pages/Movies/Movies.jsx'
 import Login from "./Login/Login.jsx"
 import Index from "./Index/Index.jsx"
+import Profile from "./Profile/Profile.jsx"
 import { createBrowserRouter } from "react-router-dom"
 
 export const router = createBrowserRouter([
@@ -24,6 +25,7 @@ export const router = createBrowserRouter([
       element: <MainLayout />,
       children: [
       { path: "/movies", element: <Movies /> },
+      {path: "/profile", element: <Profile/>},
       ]
     }
   

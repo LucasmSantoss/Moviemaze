@@ -56,8 +56,8 @@ function Header() {
         {token ? null : <Anchor className="text-sm p-1" to="/signin">Login</Anchor>}
         {token ? null : <Anchor className="text-sm p-1" to="/signup">Register</Anchor>}
         {token ? (
-          <Anchor  className="p-1">
-            <Image className="h-8" src={profile} alt="Logout" />
+          <Anchor  className="p-1" to="/profile">
+            <Image className="h-8" src={profile} alt="profile" />
           </Anchor>
         ) : null}
         {token ? (

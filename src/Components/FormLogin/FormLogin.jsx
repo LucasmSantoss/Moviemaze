@@ -9,6 +9,7 @@ const FormLogin = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const token = localStorage.getItem('token');
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -32,11 +33,10 @@ const FormLogin = () => {
             lastname: res.data.user.lastName,
             mail: res.data.user.mail,
             country: res.data.user.country,
-            
             admin,
           })
         );
-        setInterval(() => (window.location.href = "/"), 1000);
+        setInterval(() => (window.location.href = "/movies"), 1000);
       });
       Swal.fire({
         icon: 'success',

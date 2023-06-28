@@ -20,6 +20,7 @@ function MoviesRow() {
   const [playing, setPlaying] = useState(false);
   const [favoritos, setFavoritos] = useState([]);
 
+
   // funcion para realizar la peticion get a la api
   const fetchMovies = async (searchKey) => {
     const type = searchKey ? "search" : "discover";
@@ -78,8 +79,16 @@ function MoviesRow() {
   };
 
   const agregarFavorito = (movie) => {
-    setFavoritos([...favoritos, movie]);
+    if (favoritos.includes(movie)) {
+      // Si la película ya está en la lista de favoritos, la eliminamos
+      setFavoritos(favoritos.filter((favMovie) => favMovie !== movie));
+    } else {
+      // Si la película no está en la lista de favoritos, la agregamos
+      setFavoritos([...favoritos, movie]);
+    }
   };
+  
+  
 
   useEffect(() => {
     fetchMovies();
@@ -159,24 +168,16 @@ function MoviesRow() {
                   >
                     {movie.overview}
                   </p>
-                  <button
-                    onClick={() => agregarFavorito(movie)}
-                    className={`bg-orange-500 text-white px-4 py-2 rounded-lg ${
-                      favoritos.includes(movie) ? "opacity-50 cursor-not-allowed" : ""
-                    }`}
-                    disabled={favoritos.includes(movie)}
-                  >
-                    {favoritos.includes(movie) ? "Agregado a favoritos" : "Agregar a favoritos"}
-                  </button>
+                  
                 </div>
               )}
             </div>
           ) : null}
         </main>
       </div>
-
       <div className="p-2 bg-gradient-to-t from-black to-transparent grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 bg-black">
         {movies.map((movie) => (
+          
           <div
             key={movie.id}
             className="bg-white rounded-lg overflow-hidden shadow-lg"
@@ -186,14 +187,22 @@ function MoviesRow() {
             onMouseLeave={() => {
               document.body.style.cursor = "auto";
             }}
-            onClick={() => selectMovie(movie)}
+            
           >
-            <h4 className="flex justify-around text-center text-lg font-semibold text-gray-800 p-2">
-              <span>{movie.title}</span>
+            <div className="flex justify-around text-center text-lg font-semibold text-gray-800 p-2">
+            <span
+  onClick={() => agregarFavorito(movie)}
+  className={`text-1xl ${
+    favoritos.includes(movie) ? "text-yellow-400" : "text-gray-400"
+  }`}
+>
+  &#9733;
+</span>   <span>{movie.title}</span>
               <p className="text-orange-600">⚔{movie.vote_average}</p>
-            </h4>
+            </div>
             <div className="flex items-center justify-center">
               <img
+              onClick={() => selectMovie(movie)}
                 src={`${URL_IMAGE}${movie.poster_path}`}
                 alt={movie.title}
                 className="w-full h-auto object-contain"

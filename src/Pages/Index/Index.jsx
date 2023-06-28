@@ -15,7 +15,7 @@ function Index() {
       </div>
       <div className="flex justify-around items-center p-5 ">
         <p className="w-2/4 text-2xl text-center mr-3 p-4">
-          "MovieMaze" is a website created by Lucas Matias Santos and Karen Perez that allows you
+          "MovieMaze" is a website created by Lucas Matias Santos that allows you
           to discover and explore a wide selection of movies from around the
           world. Using The Movie Database <a className="text-orange-600" href="https://www.themoviedb.org/?language=es">(TMDb) </a>API, the website offers a variety
           of cinematic content, from acclaimed classics to the latest releases.
